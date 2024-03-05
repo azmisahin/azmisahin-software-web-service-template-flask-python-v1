@@ -1,0 +1,3 @@
+# packages that depend on the base environment.
+setuptools
+build
