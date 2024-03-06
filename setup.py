@@ -27,5 +27,8 @@ setup(
     },
     install_requires=[
         #
+        "gunicorn",
+        "flask",
+        "flask-restx",
     ],
 )

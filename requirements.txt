@@ -1,3 +1,4 @@
 # packages that depend on the base environment.
-flask
 gunicorn
+flask
+flask-restx

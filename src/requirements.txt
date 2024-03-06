@@ -6,3 +6,4 @@ black
 Sphinx
 behave
 flask
+flask-restx

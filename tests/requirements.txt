@@ -3,5 +3,6 @@ flake8
 black
 Sphinx
 behave
-flask
 gunicorn
+flask
+flask-restx
