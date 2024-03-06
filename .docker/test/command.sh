@@ -66,7 +66,7 @@ else
   echo "✅ Behavior-driven development was successful."
 fi
 
-flask run
+$DATA_FOLDER/.venv/bin/gunicorn --bind $HOST_IP:$TCP_PORT src.web.app:app
 if [ $? -ne 0 ]; then
   echo "✖️ Gateway failed."
   exit 1

@@ -4,3 +4,4 @@ black
 Sphinx
 behave
 flask
+gunicorn
