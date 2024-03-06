@@ -66,12 +66,12 @@ else
   echo "✅ Behavior-driven development was successful."
 fi
 
-/data/.venv/bin/python -X development /workspaces/template/example/package/tracker.py
+flask run
 if [ $? -ne 0 ]; then
-  echo "✖️ Example package tracker failed."
+  echo "✖️ Gateway failed."
   exit 1
 else
-  echo "✅ Example package tracker was successful."
+  echo "✅ Gateway was successful."
 fi
 
 echo ==========

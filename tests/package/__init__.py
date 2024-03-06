@@ -1,1 +1,1 @@
-# __init__.py
+# tests/package/__init__.py
