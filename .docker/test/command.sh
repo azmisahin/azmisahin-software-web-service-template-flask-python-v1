@@ -68,10 +68,10 @@ fi
 
 $DATA_FOLDER/.venv/bin/gunicorn --bind $HOST_IP:$TCP_PORT src.web.app:app
 if [ $? -ne 0 ]; then
-  echo "✖️ Gateway failed."
+  echo "✖️ App failed."
   exit 1
 else
-  echo "✅ Gateway was successful."
+  echo "✅ App was successful."
 fi
 
 echo ==========

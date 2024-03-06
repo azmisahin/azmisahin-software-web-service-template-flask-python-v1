@@ -1,5 +1,8 @@
 # packages that depend on the development environment.
 setuptools
 build
+flake8
+black
+Sphinx
 behave
 flask
