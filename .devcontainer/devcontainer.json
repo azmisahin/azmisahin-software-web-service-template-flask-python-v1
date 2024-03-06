@@ -47,7 +47,11 @@
           "*_test.py"
         ],
         "python.testing.pytestEnabled": false,
-        "python.testing.unittestEnabled": true
+        "python.testing.unittestEnabled": true,
+        "cucumberautocomplete.steps": [
+          "features/steps/*.py"
+        ],
+        "cucumberautocomplete.strictGherkinCompletion": true
       },
       "extensions": [
         "hediet.vscode-drawio",
@@ -60,7 +64,8 @@
         "ms-python.vscode-pylance",
         "ms-python.black-formatter",
         "charliermarsh.ruff",
-        "ms-python.flake8"
+        "ms-python.flake8",
+        "CucumberOpen.cucumber-official"
       ]
     }
   }
