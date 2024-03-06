@@ -3,11 +3,11 @@ from setuptools import setup, find_packages
 with open("README.md", "r") as fh:
     long_description = fh.read()
 setup(
-    name="web-service-template",
+    name="web_service_template",
     version="0.0.1",
     author="Azmi SAHIN",
     author_email="azmisahin@outlook.com",
-    description="It is a template to be used in the automation systems of a web service or project developed using Flask and Python.",
+    description="It is a template to be used in automation systems of web projects",
     long_description=long_description,
     long_description_content_type="text/markdown",
     classifiers=[
@@ -18,7 +18,14 @@ setup(
     url="https://github.com/azmisahin/azmisahin-software-web-service-template-flask-python-v1",
     packages=find_packages(where="src"),
     package_dir={"": "src"},
+    python_requires=">=3.11.1",
+    entry_points={
+        "console_scripts": [
+            "tracker = package.app:main",
+            "web-service-template = web.app:main",
+        ],
+    },
     install_requires=[
         #
-    ],
+    ]
 )
