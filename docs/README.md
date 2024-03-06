@@ -37,3 +37,55 @@
 +-- .editor.config                  '	Developers will use these code indents and styles in their IDEs.
 
 ```
+
+# Web Service Template
+
+This project is a template for building automation systems in web projects. It utilizes Flask, a popular Python web framework, to provide a simple web service structure.
+
+## Installation
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/azmisahin/azmisahin-software-web-service-template-flask-python-v1.git
+   ```
+
+2. Navigate to the project directory:
+
+   ```bash
+   cd azmisahin-software-web-service-template-flask-python-v1
+   ```
+
+3. Create a virtual environment (optional but recommended):
+
+   ```bash
+   python -m venv venv
+   ```
+
+4. Activate the virtual environment:
+
+   - Windows:
+
+     ```bash
+     .\venv\Scripts\activate
+     ```
+
+   - Unix or MacOS:
+
+     ```bash
+     source venv/bin/activate
+     ```
+
+5. Install project dependencies:
+
+   ```bash
+   pip install -e .
+   ```
+
+## Usage
+
+Run the web service using the provided console script:
+
+```bash
+web-service-template run
+```
