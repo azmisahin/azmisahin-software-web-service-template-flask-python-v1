@@ -34,20 +34,20 @@ else
   echo "✅ Virtual environment activated."
 fi
 
-flake8
-if [ $? -ne 0 ]; then
-  echo "✖️ Linting errors found. Please fix them before committing."
-  exit 1
-else
-  echo "✅ Linting passed."
-fi
-
 black .
 if [ $? -ne 0 ]; then
   echo "✖️ Automatically formatting Python code failed."
   exit 1
 else
   echo "✅ Automatically formatting Python code succeeded."
+fi
+
+flake8
+if [ $? -ne 0 ]; then
+  echo "✖️ Linting errors found. Please fix them before committing."
+  exit 1
+else
+  echo "✅ Linting passed."
 fi
 
 sphinx-apidoc -o /workspaces/template/dist/docs  /workspaces/template/src
@@ -68,10 +68,10 @@ fi
 
 $DATA_FOLDER/.venv/bin/gunicorn --bind $HOST_IP:$TCP_PORT "src.web.app:app"
 if [ $? -ne 0 ]; then
-  echo "✖️ App failed."
+  echo "✖️ Package failed."
   exit 1
 else
-  echo "✅ App was successful."
+  echo "✅ Package was successful."
 fi
 
 echo ==========
