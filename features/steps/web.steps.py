@@ -2,17 +2,21 @@
 from behave import given, when, then
 from src.web.app import create_app
 
-app = create_app()
+# Ensure that create_app returns the app instance directly
+app, _ = create_app()
+client = app.test_client()
 
 
 @given("the web service is running")
 def step_given_web_service_running(context):
-    context.tester = app.test_client()
+    # Initialize app and set the context.app variable
+    context.app = app
+    context.client = context.app.test_client()
 
 
 @when("I access the home endpoint")
 def step_when_access_home_endpoint(context):
-    context.response = context.tester.get("/")
+    context.response = context.client.get("/")
 
 
 @then("the response status code should be {int:d}")

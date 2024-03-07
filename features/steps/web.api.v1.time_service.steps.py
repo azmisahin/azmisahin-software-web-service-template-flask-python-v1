@@ -1,15 +1,13 @@
 # features/steps/web/api/v1/time_service_steps.py
 
 from behave import given, when, then
-
 from src.web.api.v1.time_service import TimeService
 from datetime import datetime
+from src.web.app import create_app
 
-from src.web.app import (
-    create_app,
-)  # Update this import according to your project structure
-
-client = create_app().test_client()
+# Ensure that create_app returns the app instance directly
+app, _ = create_app()
+client = app.test_client()
 
 # Let's create the TimeService object
 time_service = TimeService()
@@ -17,8 +15,9 @@ time_service = TimeService()
 
 @given("the Time Service API is running")
 def step_given_time_service_api_running(context):
-    # If you do not need to make any additional configuration here, you do not need to do anything.
-    pass
+    # Initialize app and set the context.app variable
+    context.app = app
+    context.client = context.app.test_client()
 
 
 @when("I request the current time")
