@@ -1,14 +1,18 @@
 # src/web/app.py
 import os
 from flask import Flask
-from .api import blueprint as api_blueprint
+
+from .socket import initialize
+from .api import blueprint as api_blueprint, api
 from gevent.pywsgi import WSGIServer  # Import the WSGIServer from gevent
+
 
 # Get environment variables
 APP_ENV = os.environ.get("APP_ENV")
 APP_NAME = os.environ.get("APP_NAME")
 HOST_IP = os.environ.get("HOST_IP")
 TCP_PORT = os.environ.get("TCP_PORT")
+port_number = int(os.environ.get("TCP_PORT"))
 
 
 def create_app():
@@ -17,6 +21,9 @@ def create_app():
 
     # Register the API Blueprint with a URL prefix
     app.register_blueprint(api_blueprint, url_prefix="/api")
+
+    # Ability to access endpoints via socket.
+    io = initialize(app, api)
 
     # Get API paths from the request object
     paths = [
@@ -39,13 +46,17 @@ def create_app():
             "paths": paths,
         }
 
-    return app
+    return app, io
 
 
 # Build Flask app to migrate to Gunicorn
-app = create_app()
+app, io = create_app()
 
+
+# Build Flask app to migrate to Gunicorn
 if __name__ == "__main__":
-    # Run the Flask app using Gunicorn
-    http_server = WSGIServer((HOST_IP, TCP_PORT), app)
-    http_server.serve_forever()
+    # Run the Flask app using Gunicorn with SocketIO support
+    http_server = WSGIServer(HOST_IP, port_number, app)
+    http_server.start()
+    io.init_app(app)
+    io.run(app, host=HOST_IP, port=port_number)

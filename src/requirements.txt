@@ -9,3 +9,4 @@ gunicorn
 flask
 flask-restx
 gevent
+flask-socketio

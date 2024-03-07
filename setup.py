@@ -25,7 +25,7 @@ setup(
             "web-service-template = web.app:app.run",
         ],
     },
-    install_requires=["gunicorn", "flask", "flask-restx", "gevent"],
+    install_requires=["gunicorn", "flask", "flask-restx", "gevent", "flask-socketio"],
     extras_require={
         "development": [
             "gunicorn"
