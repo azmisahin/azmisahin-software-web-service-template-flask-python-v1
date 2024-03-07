@@ -6,3 +6,4 @@ behave
 gunicorn
 flask
 flask-restx
+gevent

@@ -2,13 +2,16 @@
 import os
 from flask import Flask
 from .api import blueprint as api_blueprint
+from gevent.pywsgi import WSGIServer  # Import the WSGIServer from gevent
+
+# Get environment variables
+APP_ENV = os.environ.get("APP_ENV")
+APP_NAME = os.environ.get("APP_NAME")
+HOST_IP = os.environ.get("HOST_IP")
+TCP_PORT = os.environ.get("TCP_PORT")
 
 
 def create_app():
-    # Get environment variables
-    APP_ENV = os.environ.get("APP_ENV")
-    APP_NAME = os.environ.get("APP_NAME")
-
     # Create Flask app instance
     app = Flask(__name__)
 
@@ -43,5 +46,6 @@ def create_app():
 app = create_app()
 
 if __name__ == "__main__":
-    # Run the Flask app if this script is executed directly
-    app.run()
+    # Run the Flask app using Gunicorn
+    http_server = WSGIServer((HOST_IP, TCP_PORT), app)
+    http_server.serve_forever()
