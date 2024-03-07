@@ -1,6 +1,8 @@
 # features/web/steps/app.steps.py
 from behave import given, when, then
-from src.web.app import app
+from src.web.app import create_app
+
+app = create_app()
 
 
 @given("the web service is running")

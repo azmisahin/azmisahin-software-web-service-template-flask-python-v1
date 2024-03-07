@@ -1,12 +1,12 @@
-# tests/web/gateway_test.py
+# tests/web/app_test.py
 import unittest
-from src.web.app import app
+from src.web.app import create_app
 
 
 class AppTest(unittest.TestCase):
 
     def test_home_endpoint(self):
-        tester = app.test_client(self)
+        tester = create_app().test_client(self)
         response = tester.get("/")
         data = response.get_json()
 
