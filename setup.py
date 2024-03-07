@@ -22,13 +22,25 @@ setup(
     entry_points={
         "console_scripts": [
             "tracker = package.app:main",
-            "web-service-template = web.app:main",
+            "web-service-template = web.app:app.run",
         ],
     },
     install_requires=[
-        #
         "gunicorn",
         "flask",
         "flask-restx",
     ],
+    extras_require={
+        "development": [
+            "gunicorn"
+            # Add development tools here
+        ],
+        "test": [
+            "gunicorn"
+            # Add test tools here
+        ],
+        "production": [
+            # Add production tools here
+        ],
+    },
 )
