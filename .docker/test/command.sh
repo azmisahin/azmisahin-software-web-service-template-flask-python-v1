@@ -66,7 +66,7 @@ else
   echo "✅ Behavior-driven development was successful."
 fi
 
-$DATA_FOLDER/.venv/bin/gunicorn --bind $HOST_IP:$TCP_PORT src.web.app:app
+$DATA_FOLDER/.venv/bin/gunicorn --bind $HOST_IP:$TCP_PORT "src.web.app:app"
 if [ $? -ne 0 ]; then
   echo "✖️ App failed."
   exit 1
