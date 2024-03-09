@@ -5,17 +5,23 @@ import time
 import json
 from src.web.app import create_app
 import websocket
-from dotenv import load_dotenv
 
 
-class WebSocketTest(unittest.TestCase):
+class AppSocketTest(unittest.TestCase):
     def setUp(self):
         try:
-            load_dotenv(".env")
             # Get environment variables
+            APP_ENV = os.environ.get("APP_ENV")
             SOCKET_PORT = os.environ.get("SOCKET_PORT")
+
+            # set
+            self.app_env = APP_ENV
             self.server_host = "localhost"
             self.server_socketPortNumber = int(SOCKET_PORT)
+
+            # create app
+            self.app, self.io, _, _ = create_app()
+            self.app.config["ENV"] = self.app_env
 
         except Exception as e:
             raise Exception(f"Failed to set up the test environment: {e}")
@@ -33,11 +39,15 @@ class WebSocketTest(unittest.TestCase):
         self.thread.join()
 
     def start_flask_app(self):
-        # Start the Flask app in a separate thread
-        app, self.io, _, _ = create_app()
-        self.app_ctx = app.app_context()
+        # context
+        self.app_ctx = self.app.app_context()
         self.app_ctx.push()
-        self.io.run(app, host=f"{self.server_host}", port=self.server_socketPortNumber)
+
+        # It is important that you start gevent in the main thread and have it run in the main thread.
+        with self.app.app_context():
+            self.io.run(
+                self.app, host=f"{self.server_host}", port=self.server_socketPortNumber
+            )
 
     def test_websocket_connection(self):
         # Replace 'your_host_ip' and 'your_socket_port' with the actual values
@@ -46,6 +56,7 @@ class WebSocketTest(unittest.TestCase):
         def on_message(ws, message):
             # Define your expected message handling logic here
             expected_response = {"type": "response", "content": "Expected response"}
+            print("messsagee", message)
             self.assertEqual(json.loads(message), expected_response)
 
         # Create a WebSocket connection

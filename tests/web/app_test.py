@@ -1,15 +1,25 @@
 # tests/web/app_test.py
+import os
 import unittest
 from src.web.app import create_app
 
 
 class AppTest(unittest.TestCase):
-
     def setUp(self):
-        # Set up a testing configuration and create a test app
-        self.app, _, _, _ = create_app()
-        self.app.config["TESTING"] = True
-        self.client = self.app.test_client()
+        try:
+            # Get environment variables
+            APP_ENV = os.environ.get("APP_ENV")
+
+            # set
+            self.app_env = APP_ENV
+
+            # create app
+            self.app, _, _, _ = create_app()
+            self.app.config["ENV"] = self.app_env
+            self.client = self.app.test_client()
+
+        except Exception as e:
+            raise Exception(f"Failed to set up the test environment: {e}")
 
     def tearDown(self):
         pass  # Clean up if needed

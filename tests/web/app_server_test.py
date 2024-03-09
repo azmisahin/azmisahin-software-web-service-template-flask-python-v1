@@ -1,15 +1,27 @@
 # tests/web/app_test.py
+import os
 import unittest
 from src.web.app import create_app
+
 
 
 class AppTest(unittest.TestCase):
 
     def setUp(self):
-        # Set up a testing configuration and create a test app
-        self.app, _, _, _ = create_app()
-        self.app.config["TESTING"] = True
-        self.client = self.app.test_client()
+        try:
+            # Get environment variables
+            APP_ENV = os.environ.get("APP_ENV")
+            self.app_env = APP_ENV
+
+            # set and create
+            self.app, self.io, _, _ = create_app()
+            self.app.config["ENV"] = self.app_env
+
+            # set client
+            self.client = self.app.test_client()
+
+        except Exception as e:
+            raise Exception(f"Failed to set up the test environment: {e}")
 
     def tearDown(self):
         pass  # Clean up if needed
@@ -33,14 +45,6 @@ class AppTest(unittest.TestCase):
         self.assertIn("application", data)
         self.assertIn("environment", data)
         self.assertIn("paths", data)
-
-    def test_server_via_socket(self):
-        # Must be able to connect to the server via socket
-        pass
-
-    def test_server_via_web_socket(self):
-        # Must be able to connect to the server via web socket
-        pass
 
 
 if __name__ == "__main__":
