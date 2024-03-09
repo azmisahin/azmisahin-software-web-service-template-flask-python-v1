@@ -110,4 +110,4 @@ if __name__ == "__main__":
     http_server.start()
     ws_server.start()
     io.init_app(app)
-    io.run(app, host=HOST_IP, port=httpPortNumber)
+    io.run(app, host=HOST_IP, port=socketPortNumber)
