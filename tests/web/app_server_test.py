@@ -26,7 +26,13 @@ class AppTest(unittest.TestCase):
 
     def test_server_via_https(self):
         # Must be able to connect to the server via https
-        pass
+        response = self.client.get("/", environ_base={"wsgi.url_scheme": "https"})
+        self.assertEqual(response.status_code, 200)
+        data = response.get_json()
+        self.assertIn("message", data)
+        self.assertIn("application", data)
+        self.assertIn("environment", data)
+        self.assertIn("paths", data)
 
     def test_server_via_socket(self):
         # Must be able to connect to the server via socket
