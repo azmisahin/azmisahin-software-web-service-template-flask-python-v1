@@ -5,10 +5,10 @@ from OpenSSL import SSL
 
 def initialize(app, api):
 
-    # First create an SSL/TLS certificate
-    context = SSL.Context(SSL.SSLv23_METHOD)
-    context.use_privatekey_file("private-key.pem")
-    context.use_certificate_file("public-cert.pem")
+    # # First create an SSL/TLS certificate
+    # context = SSL.Context(SSL.SSLv23_METHOD)
+    # context.use_privatekey_file("private-key.pem")
+    # context.use_certificate_file("public-cert.pem")
 
     io = SocketIO(
         app,
@@ -20,7 +20,7 @@ def initialize(app, api):
         engineio_logger=True,
         # If your server uses secure connection (HTTPS), you need to use wss (WebSocket Secure) protocol.
         # ssl_context="adhoc",
-        ssl_context=context,
+        # ssl_context=context,
     )
 
     @io.on("message")

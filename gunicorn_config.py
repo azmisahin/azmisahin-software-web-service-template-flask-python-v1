@@ -18,5 +18,5 @@ worker_class = (
     # WebSocket worker class
     "geventwebsocket.gunicorn.workers.GeventWebSocketWorker"
 )
-certfile = "public-cert.pem"
-keyfile = "private-key.pem"
+# certfile = "public-cert.pem"
+# keyfile = "private-key.pem"
