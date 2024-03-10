@@ -36,15 +36,15 @@ def create_app():
     # Register the API Blueprint with a URL prefix
     app.register_blueprint(api_blueprint, url_prefix="/api")
 
-    # Ability to access endpoints via socket.
-    io = initialize(app, api)
-
     # Get API paths from the request object
     paths = [
         rule.rule
         for rule in app.url_map.iter_rules()
         if rule.endpoint.startswith("api.")
     ]
+
+    # Ability to access endpoints via socket.
+    io = initialize(app, api, paths)
 
     @app.route("/")
     def home():
