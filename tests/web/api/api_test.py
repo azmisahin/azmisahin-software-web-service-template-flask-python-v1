@@ -4,12 +4,15 @@ from src.web.app import create_app
 from flask import current_app
 from flask.blueprints import Blueprint
 
+# Ensure that create_app returns the app instance directly
+app = create_app()
+
 
 class AppTest(unittest.TestCase):
 
     def setUp(self):
         # Set up a testing configuration and create a test app
-        self.app, _, _, _ = create_app()
+        self.app = app
         self.app.config["TESTING"] = True
 
     def tearDown(self):

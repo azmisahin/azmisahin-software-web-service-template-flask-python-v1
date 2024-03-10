@@ -13,7 +13,7 @@ SOCKET_PORT = os.environ.get("SOCKET_PORT")
 
 # set
 bind = f"{HOST_IP}:{HTTP_PORT}"  # port for HTTP server
-workers = 2  # Number of Gunicorn workers
+workers = 1  # Number of Gunicorn workers
 worker_class = (
     # WebSocket worker class
     "geventwebsocket.gunicorn.workers.GeventWebSocketWorker"

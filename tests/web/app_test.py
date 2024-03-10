@@ -3,6 +3,9 @@ import os
 import unittest
 from src.web.app import create_app
 
+# Ensure that create_app returns the app instance directly
+app = create_app()
+
 
 class AppTest(unittest.TestCase):
     def setUp(self):
@@ -14,7 +17,7 @@ class AppTest(unittest.TestCase):
             self.app_env = APP_ENV
 
             # create app
-            self.app, _, _, _ = create_app()
+            self.app = app
             self.app.config["ENV"] = self.app_env
             self.client = self.app.test_client()
 

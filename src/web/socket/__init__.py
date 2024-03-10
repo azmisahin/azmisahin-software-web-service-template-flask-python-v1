@@ -1,26 +1,26 @@
 # src/web/socket/__init__.py
 
 import os
+import logging
 from flask_socketio import SocketIO
 import requests
-import logging
 
 HOST_IP = os.environ.get("HOST_IP")
 HTTP_PORT = os.environ.get("HTTP_PORT")
 httpPortNumber = int(HTTP_PORT)
 PROTOCOL = "HTTP"
+
 # Configure logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 
-def initialize(app, api, paths):
+def initialize(app, paths):
     """
     Initialize and configure Flask SocketIO.
 
     Parameters:
     - app: Flask application instance
-    - api: (not clear from the code, maybe Flask-RESTful API instance?)
     - paths: List of paths to check
 
     Returns:
