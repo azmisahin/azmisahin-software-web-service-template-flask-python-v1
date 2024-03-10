@@ -1,10 +1,8 @@
 # src/web/socket/__init__.py
 from flask_socketio import SocketIO
-from OpenSSL import SSL
 
 
 def initialize(app, api):
-
     # # First create an SSL/TLS certificate
     # context = SSL.Context(SSL.SSLv23_METHOD)
     # context.use_privatekey_file("private-key.pem")
