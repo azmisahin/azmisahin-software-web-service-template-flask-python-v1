@@ -1,4 +1,6 @@
 # packages that depend on the test environment.
+setuptools
+build
 flake8
 black
 Sphinx
@@ -11,5 +13,5 @@ flask-socketio
 flask-cors
 pyOpenSSL
 gevent-websocket
-python-dotenv
 websocket-client
+python-dotenv
